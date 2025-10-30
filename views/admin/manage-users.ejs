@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+
+<div class="admin-container container">
+    <div class="admin-header">
+        <h1 class="page-title">Manage Admin Users</h1>
+        <!-- In a full application, this button would link to a form to create a new user -->
+        <a href="/admin/users/add" class="btn btn-primary">Add New User</a>
+    </div>
+    
+    <p>This section allows you to view all registered admin users and their roles.</p>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>User ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(users && users.length > 0) { %>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.username %></td>
+                        <td><strong><%= user.role %></strong></td>
+                        <td><%= user._id %></td>
+                        <td>
+                            <!-- Logic for editing/deleting users would be added here -->
+                            <a href="#" class="btn-action edit">Edit</a>
+                            <a href="#" class="btn-action delete" onclick="return confirm('Are you sure?');">Delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4">No users found in the database.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer') %>
